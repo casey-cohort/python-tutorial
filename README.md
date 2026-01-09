@@ -1,7 +1,7 @@
-# Introduction to Python for the Casey Lab
-The purpose of this tutorial is to help you get started with Python. 
+# introduction to Python for the Casey Lab
+the purpose of this tutorial is to help you get started with Python. 
 
-## Contents
+## contents
 
 - `practice.Rmd` - R Markdown file with Python code to translate (no answers)
 - `practice_with_answers.Rmd` - R Markdown file with answers
@@ -10,37 +10,37 @@ The purpose of this tutorial is to help you get started with Python.
 
 ---
 
-## Python Setup
+## python setup
 
-### Why use environments?
+### why use environments?
 
-**Always use a virtual environment** for Python projects. Environments isolate your project's dependencies, preventing conflicts between different projects.
+**always use a virtual environment** for Python projects. environments isolate your project's dependencies, preventing conflicts between different projects.
 
-### Creating and using environments
+### creating and using environments
 
-In your terminal:
+in your terminal:
 
 ```bash
-# Create a new environment
+# create a new environment
 conda create -n NAME_OF_ENV python=3.10
 
-# Activate the environment
+# activate the environment
 conda activate NAME_OF_ENV
 
-# Deactivate the environment
+# deactivate the environment
 conda deactivate
 ```
 
-### Installing packages
+### installing packages
 
-- Use `pip` for Python packages (most common)
-- Use `conda` for non-Python dependencies or complex scientific packages
+- use `pip` for Python packages (most common)
+- use `conda` for non-Python dependencies or complex scientific packages
 
 ```bash
-# Install with pip
+# install with pip
 pip install package_name
 
-# Install with conda
+# install with conda
 conda install package_name
 ```
 
@@ -59,7 +59,7 @@ to set this up:
 
 ### exercise 1: python to r translation
 
-Practice translating Python code to R using the `practice.Rmd` file.
+practice translating Python code to R using the `practice.Rmd` file.
 
 **setup:**
 
@@ -71,44 +71,44 @@ pip install pandas numpy scipy tabulate
 
 **instructions:**
 
-1. Open `practice.Rmd` in RStudio
-2. Read through the Python code
-3. Write the equivalent R code in the empty chunk
-4. Check your work against `practice_with_answers.Rmd`
+1. open `practice.Rmd` in VSCode or RStudio
+2. read through the Python code
+3. write the equivalent R code in the empty chunk
+4. check your work against `practice_with_answers.Rmd`
 
 ### exercise 2: python basics notebook
 
-Practice Python fundamentals with the Jupyter notebook.
+practice python fundamentals with the jupyter notebook.
 
 **instructions:**
 
-1. Make sure your environment is activated: `conda activate tutorial`
-2. Open `python_practice.ipynb` in VS Code
-3. Work through the exercises, running each cell with Shift+Enter
-4. Complete the practice problems at the end
+1. make sure your environment is activated: `conda activate tutorial`
+2. open `python_practice.ipynb` in VSCode
+3. work through the exercises, running each cell with Shift+Enter
+4. complete the practice problems at the end
 
 ---
 
 ## quick reference: python vs r
 
-| Task | Python (pandas) | R (tidyverse) |
+| task | python (pandas) | r (tidyverse) |
 |------|-----------------|---------------|
-| Read CSV | `pd.read_csv("file.csv")` | `read_csv("file.csv")` |
-| View head | `df.head()` | `head(df)` |
-| Column mean | `df['col'].mean()` | `mean(df$col)` |
-| Filter rows | `df[df['col'] > 5]` | `filter(df, col > 5)` |
-| Select columns | `df[['a', 'b']]` | `select(df, a, b)` |
-| Rename column | `df.rename(columns={'old': 'new'})` | `rename(df, new = old)` |
-| New column | `df['new'] = df['a'] + df['b']` | `mutate(df, new = a + b)` |
+| read CSV | `pd.read_csv("file.csv")` | `read_csv("file.csv")` |
+| view head | `df.head()` | `head(df)` |
+| column mean | `df['col'].mean()` | `mean(df$col)` |
+| filter rows | `df[df['col'] > 5]` | `filter(df, col > 5)` |
+| select columns | `df[['a', 'b']]` | `select(df, a, b)` |
+| rename column | `df.rename(columns={'old': 'new'})` | `rename(df, new = old)` |
+| new column | `df['new'] = df['a'] + df['b']` | `mutate(df, new = a + b)` |
 
 ---
 
 ## tips
 
-- **Indentation matters in Python!** Use 4 spaces (not tabs) for code blocks
-- **0-indexed:** Python counts from 0, R counts from 1
-- **Assignment:** Python uses `=`, R uses `<-` (though `=` also works)
-- **Use `print()`:** Unlike R, Python won't automatically display results in scripts
+- **indentation matters in Python!** use 4 spaces (not tabs) for code blocks
+- **0-indexed:** python counts from 0, R counts from 1
+- **assignment:** Python uses `=`, R uses `<-` (though `=` also works)
+- **use `print()`:** unlike R, Python won't automatically display results in scripts
 
 ---
 

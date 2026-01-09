@@ -41,10 +41,6 @@ data <- data.frame(
 write.csv(data, "data.csv", row.names = FALSE)
 ```
 
-# Python to R Translation Exercise
-
-here is a chunk of code in python to translate to R.
-
 ## about the data
 
 the data we generated is called `data.csv`. it has the following columns:
@@ -90,14 +86,14 @@ print(f"degrees of freedom: {dof}")
 
 ## python output preview
 
-The first 5 rows of the output from the Python code:
+the first 5 rows of the output from the python code:
 
 ```{python python-head, echo=TRUE, results='asis', eval=TRUE}
 head = df.head()
 print(head.to_markdown())
 ```
 
-## R Translation (Answer Key)
+## r translation (answer key)
 
 ```{r r-answer, warning=FALSE, echo=TRUE}
 # read in the dataset
