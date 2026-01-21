@@ -1,6 +1,23 @@
 # introduction to Python for the Casey Lab
 the purpose of this tutorial is to help you get started with Python. 
 
+## why python? 
+- similar to r, python is easy to read and write, it is used across research disciplines, and has a lot of powerful packages like `numpy` and `pandas` for data manipulation and analysis.
+- often, python is faster than r for certain operations, such as spatial analysis, because: 
+    - a lot of the tools in python, such as `numpy` and `pandas`, are written in C and designed for performance at scale. 
+    - it is also easier to implement parallel processing in python.
+    - for spatial analysis, Python's geopandas, shapely, and rasterio are thin wrappers around these fast C/C++ libraries, with less overhead.
+    - memory efficiency — Python handles large rasters and satellite imagery more gracefully
+    - Google Earth Engine — the Python API is more developed and better supported than the R equivalent (rgee)
+
+## when to consider switching 
+- large datasets
+- spatial analysis
+- slow r code
+- large rasters and satellite imagery
+- Google Earth Engine
+- parallel processing
+
 ## contents
 
 - `practice.Rmd` - R Markdown file with Python code to translate (no answers)
@@ -12,11 +29,16 @@ the purpose of this tutorial is to help you get started with Python.
 
 ## python setup
 
-### why use environments?
+### 1. clone this repository
+
+### 2. install vscode
+see [00_vscode_setup.md](00_vscode_setup.md) for instructions.
+
+### 3. why use environments?
 
 **always use a virtual environment** for Python projects. environments isolate your project's dependencies, preventing conflicts between different projects.
 
-### creating and using environments
+### 4. creating and using environments
 
 in your terminal:
 
@@ -31,12 +53,15 @@ conda activate NAME_OF_ENV
 conda deactivate
 ```
 
-### installing packages
+### 5. installing packages
 
 - use `pip` for Python packages (most common)
 - use `conda` for non-Python dependencies or complex scientific packages
 
 ```bash
+# activate the environment
+conda activate tutorial
+
 # install with pip
 pip install package_name
 
@@ -44,7 +69,7 @@ pip install package_name
 conda install package_name
 ```
 
-### pre-commit hook
+### 6. pre-commit hook
 https://pre-commit.com/ ensures that you do not push a jupyter notebook to github with output in it. this is important because you may mistakenly push something that should not be on github, or that is too big to be on github. the pre-commit hook will check for output in your jupyter notebooks. if there is output, it will fail, then it will clear the output, then you can add, commit, and push again.
 
 to set this up: 
