@@ -1,15 +1,6 @@
 # introduction to Python for the Casey Lab
 the purpose of this tutorial is to help you get started with Python. 
 
-## why python? 
-- similar to r, python is easy to read and write, it is used across research disciplines, and has a lot of powerful packages like `numpy` and `pandas` for data manipulation and analysis.
-- often, python is faster than r for certain operations, such as spatial analysis, because: 
-    - a lot of the tools in python, such as `numpy` and `pandas`, are written in C and designed for performance at scale. 
-    - it is also easier to implement parallel processing in python.
-    - for spatial analysis, Python's geopandas, shapely, and rasterio are thin wrappers around these fast C/C++ libraries, with less overhead.
-    - memory efficiency — Python handles large rasters and satellite imagery more gracefully
-    - Google Earth Engine — the Python API is more developed and better supported than the R equivalent (rgee)
-
 ## when to consider switching 
 - large datasets
 - spatial analysis
@@ -20,10 +11,11 @@ the purpose of this tutorial is to help you get started with Python.
 
 ## contents
 
-- `practice.Rmd` - R Markdown file with Python code to translate (no answers)
-- `practice_with_answers.Rmd` - R Markdown file with answers
-- `python_practice.ipynb` - Jupyter notebook for practicing Python basics
-- `data.csv` - Sample dataset
+- `01_python_to_r/python_to_r.Rmd` - R Markdown file with Python code to translate (no answers)
+- `01_python_to_r/python_to_r_with_answers.Rmd` - R Markdown file with answers
+- `02_python_practice/python_practice.ipynb` - Jupyter notebook for practicing Python basics
+- `02_python_practice/python_practice_with_answers.ipynb` - Jupyter notebook with answers to the practice problems
+- `03_python_spatial/spatial_data.ipynb` - Jupyter notebook for practicing spatial data analysis
 
 ---
 
@@ -32,44 +24,12 @@ the purpose of this tutorial is to help you get started with Python.
 ### 1. clone this repository
 
 ### 2. install vscode
-see [00_vscode_setup.md](00_vscode_setup.md) for instructions.
+see [00_setup/02_vscode_setup.md](00_setup/02_vscode_setup.md) for instructions.
 
-### 3. why use environments?
+### 3. set up python and environments
+see [00_setup/01_python_setup.md](00_setup/01_python_setup.md) for instructions.
 
-**always use a virtual environment** for Python projects. environments isolate your project's dependencies, preventing conflicts between different projects.
-
-### 4. creating and using environments
-
-in your terminal:
-
-```bash
-# create a new environment
-conda create -n NAME_OF_ENV python=3.10
-
-# activate the environment
-conda activate NAME_OF_ENV
-
-# deactivate the environment
-conda deactivate
-```
-
-### 5. installing packages
-
-- use `pip` for Python packages (most common)
-- use `conda` for non-Python dependencies or complex scientific packages
-
-```bash
-# activate the environment
-conda activate tutorial
-
-# install with pip
-pip install package_name
-
-# install with conda
-conda install package_name
-```
-
-### 6. pre-commit hook
+### 4. For the future, set up a pre-commit hook
 https://pre-commit.com/ ensures that you do not push a jupyter notebook to github with output in it. this is important because you may mistakenly push something that should not be on github, or that is too big to be on github. the pre-commit hook will check for output in your jupyter notebooks. if there is output, it will fail, then it will clear the output, then you can add, commit, and push again.
 
 to set this up: 
@@ -84,22 +44,14 @@ to set this up:
 
 ### exercise 1: python to r translation
 
-practice translating Python code to R using the `practice.Rmd` file.
-
-**setup:**
-
-```bash
-conda create -n tutorial python=3.10
-conda activate tutorial
-pip install pandas numpy scipy tabulate
-```
+practice translating Python code to R using the `python_to_r.Rmd` file.
 
 **instructions:**
 
-1. open `practice.Rmd` in VSCode or RStudio
+1. open `01_python_to_r/python_to_r.Rmd` in VSCode
 2. read through the Python code
 3. write the equivalent R code in the empty chunk
-4. check your work against `practice_with_answers.Rmd`
+4. check your work against `01_python_to_r/python_to_r_with_answers.Rmd`
 
 ### exercise 2: python basics notebook
 
@@ -107,8 +59,19 @@ practice python fundamentals with the jupyter notebook.
 
 **instructions:**
 
-1. make sure your environment is activated: `conda activate tutorial`
-2. open `python_practice.ipynb` in VSCode
+1. make sure your environment is activated: `conda activate practice_env`
+2. open `02_python_practice/python_practice.ipynb` in VSCode
+3. work through the exercises, running each cell with Shift+Enter
+4. complete the practice problems at the end
+
+### exercise 3: spatial data analysis
+
+practice spatial data analysis with the jupyter notebook.
+
+**instructions:**
+
+1. make sure your environment is activated: `conda activate practice_env`
+2. open `03_python_spatial/spatial_data.ipynb` in VSCode
 3. work through the exercises, running each cell with Shift+Enter
 4. complete the practice problems at the end
 
@@ -147,11 +110,11 @@ pip install module_name
 **conda environment issues:**
 ```bash
 conda deactivate
-conda activate tutorial
+conda activate practice_env
 ```
 
 **jupyter can't find kernel:**
 ```bash
 pip install ipykernel
-python -m ipykernel install --user --name=tutorial
+python -m ipykernel install --user --name=practice_env
 ```

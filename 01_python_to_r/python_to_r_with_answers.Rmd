@@ -12,7 +12,7 @@ knitr::opts_chunk$set(results = 'asis', fig.align = 'center', echo = TRUE,
 
 library(pacman)
 pacman::p_load(tidyverse, reticulate, knitr, kableExtra)
-use_condaenv("tutorial")
+use_condaenv("practice_env")
 ```
 
 ```{r generate-data, echo=FALSE, eval=TRUE}
@@ -75,8 +75,16 @@ df = df[df['age_in_years'] > 50]
 # create a new variable by adding or multiplying two variables
 df['age_first_smoked'] = df['age_in_years'] - df['years_smoked']
 
+# drop rows with missing values for the statistical test
+df_test = df.dropna(subset=['age_first_smoked'])
+
+# create categorical variables for chi-square test (chi-square requires categorical data)
+# use quantiles to ensure balanced groups
+df_test['age_group'] = pd.qcut(df_test['age_in_years'], q=3, labels=['50-62', '62-72', '72+'])
+df_test['age_first_smoked_group'] = pd.qcut(df_test['age_first_smoked'], q=3, labels=['Low', 'Medium', 'High'])
+
 # compute a summary statistic (chi-square test in this example)
-crosstab = pd.crosstab(df['age_in_years'], df['age_first_smoked'])
+crosstab = pd.crosstab(df_test['age_group'], df_test['age_first_smoked_group'])
 chi2_stat, p_val, dof, expected = stats.chi2_contingency(crosstab)
 
 print(f"chi-square test statistic: {chi2_stat}")
@@ -119,8 +127,22 @@ df <- df %>%
 df <- df %>%
   mutate(age_first_smoked = age_in_years - years_smoked)
 
+# drop rows with missing values for the statistical test
+df_test <- df %>%
+  filter(!is.na(age_first_smoked))
+
+# create categorical variables for chi-square test (chi-square requires categorical data)
+# use quantiles to ensure balanced groups
+df_test <- df_test %>%
+  mutate(
+    age_group = cut(age_in_years, breaks = quantile(age_in_years, probs = c(0, 1/3, 2/3, 1), na.rm = TRUE), 
+                    labels = c('50-62', '62-72', '72+'), include.lowest = TRUE),
+    age_first_smoked_group = cut(age_first_smoked, breaks = quantile(age_first_smoked, probs = c(0, 1/3, 2/3, 1), na.rm = TRUE),
+                                  labels = c('Low', 'Medium', 'High'), include.lowest = TRUE)
+  )
+
 # compute a summary statistic (chi-square test)
-chisq_result <- chisq.test(table(df$age_in_years, df$age_first_smoked))
+chisq_result <- chisq.test(table(df_test$age_group, df_test$age_first_smoked_group))
 print(sprintf("chi-square test statistic: %s", chisq_result$statistic))
 print(sprintf("p-value: %s", chisq_result$p.value))
 print(sprintf("degrees of freedom: %s", chisq_result$parameter))
