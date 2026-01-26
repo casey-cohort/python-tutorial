@@ -12,7 +12,7 @@ knitr::opts_chunk$set(results = 'hide', echo = FALSE, fig.keep = 'none',
 
 library(pacman)
 pacman::p_load(tidyverse, reticulate, knitr, kableExtra)
-use_condaenv("tutorial")
+use_condaenv("practice_env")
 ```
 
 ```{r generate-data, echo=FALSE, eval=TRUE}
@@ -76,8 +76,16 @@ df = df[df['age_in_years'] > 50]
 # create a new variable by adding or multiplying two variables
 df['age_first_smoked'] = df['age_in_years'] - df['years_smoked']
 
+# drop rows with missing values for the statistical test
+df_test = df.dropna(subset=['age_first_smoked'])
+
+# create categorical variables for chi-square test (chi-square requires categorical data)
+# use quantiles to ensure balanced groups
+df_test['age_group'] = pd.qcut(df_test['age_in_years'], q=3, labels=['50-62', '62-72', '72+'])
+df_test['age_first_smoked_group'] = pd.qcut(df_test['age_first_smoked'], q=3, labels=['Low', 'Medium', 'High'])
+
 # compute a summary statistic (chi-square test in this example)
-crosstab = pd.crosstab(df['age_in_years'], df['age_first_smoked'])
+crosstab = pd.crosstab(df_test['age_group'], df_test['age_first_smoked_group'])
 chi2_stat, p_val, dof, expected = stats.chi2_contingency(crosstab)
 
 print(f"chi-square test statistic: {chi2_stat}")
@@ -103,7 +111,9 @@ write a code chunk below that does the same thing as the python code above. your
 3. rename `age` to `age_in_years`
 4. subset to only include rows where `age_in_years > 50`
 5. create a new variable `age_first_smoked` = `age_in_years` - `years_smoked`
-6. run a chi-square test and print the results
+6. drop rows with missing values in `age_first_smoked`
+7. create categorical variables for age groups and age_first_smoked groups using quantiles (pd.qcut with q=3)
+8. run a chi-square test and print the results
 
 ```{r your-answer}
 # YOUR CODE HERE
