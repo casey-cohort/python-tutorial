@@ -18,7 +18,6 @@ the purpose of this tutorial is to help you get started with Python.
 - `03_python_spatial/spatial_data.ipynb` - Jupyter notebook for practicing spatial data analysis
 
 ---
-
 ## python setup
 
 ### 1. clone this repository
