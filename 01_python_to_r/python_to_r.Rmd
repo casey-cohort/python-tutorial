@@ -117,7 +117,47 @@ write a code chunk below that does the same thing as the python code above. your
 
 ```{r your-answer}
 # YOUR CODE HERE
+library(tidyverse)
+f = read.csv("data.csv")
 
+# loop over columns and print out means for age and smoking
+for (column in colnames(df)) {
+    if (column %in% c("age", "smoking")) {
+        colmean <- mean(df[[column]])
+        cat(sprintf("%s mean is %s\n", column, colmean))
+    }
+}
+
+# rename a variable
+df <- df %>% rename("age_in_years" = "age")
+
+# subset based on a value
+df <- filter(df, age_in_years > 50)
+
+# create a new variable by adding or multiplying two variables
+df <- mutate(df, age_first_smoked = age_in_years - years_smoked)
+
+# drop rows with missing values for the statistical test
+df <- df |> drop_na(age_first_smoked)
+
+# create categorical variables for chi-square test (chi-square requires categorical data)
+# use quantiles to ensure balanced groups
+df <- df %>%
+  mutate(age_group = case_when(
+    age_in_years >= 50 & age < 63 ~ "50-62",
+    age_in_years >= 63 & age < 73 ~ "62-72",
+    age_in_years >= 73 ~ "73+",
+  ))
+
+df_test['age_first_smoked_group'] = pd.qcut(df_test['age_first_smoked'], q=3, labels=['Low', 'Medium', 'High'])
+
+# compute a summary statistic (chi-square test in this example)
+crosstab = pd.crosstab(df_test['age_group'], df_test['age_first_smoked_group'])
+chi2_stat, p_val, dof, expected = stats.chi2_contingency(crosstab)
+
+print(f"chi-square test statistic: {chi2_stat}")
+print(f"P-value: {p_val}")
+print(f"degrees of freedom: {dof}")
 ```
 
 \newpage
