@@ -3,7 +3,8 @@ repos:
     hooks:
       - id: jupyter-nb-clear-output
         name: jupyter-nb-clear-output
-        files: \.ipynb$
+        files: '\.ipynb$'
         stages: [commit]
         language: system
-        entry: jupyter nbconvert --ClearOutputPreprocessor.enabled=True --inplace
+        entry: bash -c 'conda run -n practice_env python -m nbconvert --ClearOutputPreprocessor.enabled=True --inplace "$@"' --
+        pass_filenames: true
