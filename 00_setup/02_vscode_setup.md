@@ -77,3 +77,28 @@ The R extension needs to know where R is installed on your computer. If the R Te
 2. Search for `r.rterm.windows`
 3. Set the path to your R installation, typically:
    - `C:\Program Files\R\R-4.x.x\bin\R.exe` (replace `4.x.x` with your version number)
+
+### Optional: Set up the R pipe shortcut 
+1. Type Cmd+Shift+P to open the Command Palette
+2. Select Open Keyboard Shortcuts (JSON)
+3. Paste one of these into that file:
+
+**Native R pipe (`|>`)**:
+```json
+[{
+  "key": "cmd+shift+m",
+  "command": "type",
+  "args": { "text": " |> " },
+  "when": "editorTextFocus"
+}]
+```
+
+**Magrittr pipe (`%>%`)**:
+```json
+[{
+  "key": "cmd+shift+m",
+  "command": "type",
+  "args": { "text": " %>% " },
+  "when": "editorTextFocus"
+}]
+```
